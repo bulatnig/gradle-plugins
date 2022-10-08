@@ -1,0 +1,40 @@
+plugins {
+    id 'java-gradle-plugin'
+    id 'maven-publish'
+    id 'groovy'
+}
+
+group = 'org.bulatnig'
+version = '1.0.0'
+
+publishing {
+    repositories {
+        maven {
+            name = 'myRepo'
+            url = 'https://mydomain.com/myrepo'
+        }
+    }
+}
+
+gradlePlugin {
+    plugins {
+        simplePlugin {
+            id = 'org.bulatnig.gradle.lombok'
+            implementationClass = 'org.bulatnig.gradle.lombok.GradleLombokPlugin'
+        }
+    }
+}
+
+repositories {
+    gradlePluginPortal()
+}
+
+dependencies {
+    implementation 'io.freefair.gradle:lombok-plugin:6.5.0.3'
+
+    testImplementation 'org.spockframework:spock-core:2.1-groovy-3.0'
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}

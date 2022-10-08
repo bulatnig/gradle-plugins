@@ -1,0 +1,28 @@
+plugins {
+    id 'groovy-gradle-plugin'
+    id 'maven-publish'
+}
+
+group = 'org.bulatnig'
+version = '1.0.0'
+
+publishing {
+    repositories {
+        maven {
+            name = 'myRepo'
+            url = 'https://mydomain.com/myrepo'
+        }
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation 'org.spockframework:spock-core:2.1-groovy-3.0'
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
